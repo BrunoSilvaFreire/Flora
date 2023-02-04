@@ -41,6 +41,11 @@ namespace Flora.Scripts {
             }
         }
 
+        public void Generate(WorldPreset preset) {
+            width = preset.width;
+            height = preset.height;
+        }
+
         public void Generate() {
             Clear();
 

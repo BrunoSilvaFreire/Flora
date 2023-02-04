@@ -17,7 +17,7 @@ namespace Flora.Scripts.Obstacles {
             // TODO: Punish 
         }
 
-        public override IEnumerator Act(float speedMultiplier) {
+        public override IEnumerator Activate(float speedMultiplier) {
             animator.SetTrigger(BeginKey);
             collider.enabled = false;
             yield return new WaitForSeconds(delay * speedMultiplier);
