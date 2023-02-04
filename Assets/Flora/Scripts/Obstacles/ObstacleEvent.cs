@@ -54,7 +54,7 @@ namespace Flora.Scripts.Obstacles {
             public float delay;
         }
 
-        public List<Vector2Int> sproutOffsets;
+        public List<SproutOffset> sproutOffsets;
 
         public override IEnumerator Activate(GameManager gameManager, float speedMultiplier) {
             yield break;
