@@ -1,13 +1,13 @@
-﻿namespace Flora.Scripts.Obstacles
-{
+﻿using System.Collections;
+namespace Flora.Scripts.Obstacles {
 
 
-    public class LogSpawner : Obstacle
-    {
+    public class LogSpawner : Obstacle {
 
         public override ObstacleType ObstacleType => ObstacleType.Log;
 
-        public override void Act()
-        { }
+        public override IEnumerator Act() {
+            yield break;
+        }
     }
 }

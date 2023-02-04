@@ -1,7 +1,5 @@
-﻿namespace Flora.Scripts.Obstacles
-{
-    public enum ObstacleType
-    {
+﻿namespace Flora.Scripts.Obstacles {
+    public enum ObstacleType {
         Sprout,
         Log,
         Bee

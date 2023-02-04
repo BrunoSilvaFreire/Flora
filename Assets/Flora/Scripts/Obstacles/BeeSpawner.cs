@@ -1,11 +1,11 @@
-﻿namespace Flora.Scripts.Obstacles
-{
-    public class BeeSpawner : Obstacle
-    {
+﻿using System.Collections;
+namespace Flora.Scripts.Obstacles {
+    public class BeeSpawner : Obstacle {
 
         public override ObstacleType ObstacleType => ObstacleType.Bee;
 
-        public override void Act()
-        { }
+        public override IEnumerator Act() {
+            yield break;
+        }
     }
 }
