@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 
 namespace Flora.Scripts {
-    
+
     public class WorldManager : MonoBehaviour {
         public int width, height;
 
@@ -21,11 +21,10 @@ namespace Flora.Scripts {
         public GameObject cornerBottomRight;
         private List<GameObject> allocatedPieces;
 
-        public void Generate() {
+        public void Clear() {
             if (allocatedPieces != null) {
                 foreach (var allocatedPiece in allocatedPieces) {
 #if UNITY_EDITOR
-
                     if (!EditorApplication.isPlaying) {
                         DestroyImmediate(allocatedPiece);
                         continue;
@@ -34,12 +33,19 @@ namespace Flora.Scripts {
                     Destroy(allocatedPiece);
                 }
             }
+        }
+
+        public void Generate() {
+            Clear();
 
             allocatedPieces = new List<GameObject>();
 
             for (var x = -width; x <= width; x++) {
                 for (var z = -height; z <= height; z++) {
-                    var obj = Instantiate(BuildPiece(x, z), new Vector3(x, 0, z), Quaternion.Euler(-90, 0, 0), transform);
+                    var original = BuildPiece(x, z);
+                    var obj = Instantiate(original, new Vector3(x, 0, z), Quaternion.identity, transform);
+                    obj.name = $"{original} ({x}, {z})";
+                    obj.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
                     allocatedPieces.Add(obj);
                 }
             }
@@ -80,8 +86,13 @@ namespace Flora.Scripts {
     public class WorldManagerEditor : Editor {
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
-            if (GUILayout.Button("Generate")) {
-                ((WorldManager) target).Generate();
+            using (new EditorGUILayout.HorizontalScope()) {
+                if (GUILayout.Button("Generate")) {
+                    ((WorldManager) target).Generate();
+                }
+                if (GUILayout.Button("Clear")) {
+                    ((WorldManager) target).Clear();
+                }
             }
         }
     }

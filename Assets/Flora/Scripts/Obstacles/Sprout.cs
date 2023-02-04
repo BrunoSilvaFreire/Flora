@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
     public class Sprout : Obstacle {
@@ -12,11 +13,18 @@ namespace Flora.Scripts.Obstacles {
 
         public override ObstacleType ObstacleType => ObstacleType.Sprout;
 
-        public override IEnumerator Act() {
+        private void OnTriggerEnter(Collider other) {
+            // TODO: Punish 
+        }
+
+        public override IEnumerator Act(float speedMultiplier) {
             animator.SetTrigger(BeginKey);
-            yield return new WaitForSeconds(delay);
+            collider.enabled = false;
+            yield return new WaitForSeconds(delay * speedMultiplier);
             animator.SetTrigger(SpikeKey);
-            yield return new WaitForSeconds(stayDuration);
+            collider.enabled = true;
+            yield return new WaitForSeconds(stayDuration * speedMultiplier);
+            collider.enabled = false;
             animator.SetTrigger(ResetKey);
         }
     }

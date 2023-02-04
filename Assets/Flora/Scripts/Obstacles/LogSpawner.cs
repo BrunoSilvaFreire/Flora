@@ -6,7 +6,7 @@ namespace Flora.Scripts.Obstacles {
 
         public override ObstacleType ObstacleType => ObstacleType.Log;
 
-        public override IEnumerator Act() {
+        public override IEnumerator Act(float speedMultiplier) {
             yield break;
         }
     }

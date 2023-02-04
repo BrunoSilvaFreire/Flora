@@ -6,7 +6,7 @@ namespace Flora.Scripts.Obstacles {
             get;
         }
 
-        public abstract IEnumerator Act();
+        public abstract IEnumerator Act(float speedMultiplier);
     }
 
 }
