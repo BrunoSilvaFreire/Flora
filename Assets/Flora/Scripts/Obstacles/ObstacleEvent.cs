@@ -7,11 +7,18 @@ using Random = UnityEngine.Random;
 
 namespace Flora.Scripts.Obstacles {
     [Serializable]
-    public struct RandomizedActivation {
+    public abstract class Activation {
+        public float delay;
+
+        public abstract void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet);
+    }
+
+    [Serializable]
+    public class RandomizedActivation : Activation {
         public int min, max;
         public ObstacleType type;
 
-        public void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
             var numToActivate = Random.Range(min, max + 1);
             var remaining = numToActivate;
 
@@ -39,12 +46,6 @@ namespace Flora.Scripts.Obstacles {
             }
         }
     }
-    [Serializable]
-    public abstract class Activation {
-        public float delay;
-
-        public abstract IEnumerator Activate(GameManager gameManager, float speedMultiplier);
-    }
 
     [Serializable]
     public class SproutActivation : Activation {
@@ -56,8 +57,7 @@ namespace Flora.Scripts.Obstacles {
 
         public List<SproutOffset> sproutOffsets;
 
-        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier) {
-            yield break;
+        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet) {
         }
     }
 
@@ -74,8 +74,7 @@ namespace Flora.Scripts.Obstacles {
         public LogLocation location;
         public int logLength;
 
-        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier) {
-            yield break;
+        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
         }
     }
 
@@ -86,14 +85,13 @@ namespace Flora.Scripts.Obstacles {
         public float minTimeToActivate, maxTimeToActivate;
 
         [SerializeReference]
-        public List<Activation> predefinedActivations;
-        public RandomizedActivation[] randomActivations;
-
+        public List<Activation> activations;
 
         public void Activate(GameManager gameManager, float speedMultiplier) {
-            HashSet<Obstacle> blacklist = new HashSet<Obstacle>();
-            foreach (var randomizedActivation in randomActivations) {
-                randomizedActivation.Activate(gameManager, speedMultiplier, blacklist);
+            var blacklist = new HashSet<Obstacle>();
+
+            foreach (var activation in activations) {
+                activation.Activate(gameManager, speedMultiplier, blacklist);
             }
         }
     }

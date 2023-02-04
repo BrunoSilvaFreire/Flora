@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using Flora.Scripts.Obstacles;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace Flora.Scripts {
     public class GameManager : MonoBehaviour {
 
         public AnimationCurve speedOverTime;
+        public AnimationCurve activationCooldownCurve;
         public ObstacleEvent[] events;
-
+        public bool step;
         private Dictionary<ObstacleType, List<Obstacle>> _obstaclesByType;
 
         private float time;
+        private float activationCooldown;
 
         private void Cache() {
             _obstaclesByType = new Dictionary<ObstacleType, List<Obstacle>>();
@@ -30,7 +33,35 @@ namespace Flora.Scripts {
         }
 
         private void Update() {
+            if (!step) {
+                return;
+            }
+
+            Step();
+        }
+
+        private void Step() {
             time += Time.deltaTime;
+            if (activationCooldown > 0) {
+                activationCooldown -= Time.deltaTime;
+            } else {
+                ActivateAnEvent();
+                ResetCooldown();
+            }
+        }
+
+        private void ResetCooldown() {
+            activationCooldown = activationCooldownCurve.Evaluate(time);
+        }
+
+        private void ActivateAnEvent() {
+            var anEvent = SelectEvent();
+            var speedMultiplier = speedOverTime.Evaluate(time);
+            anEvent.Activate(this, speedMultiplier);
+        }
+
+        private ObstacleEvent SelectEvent() {
+            throw new NotImplementedException();
         }
 
         public List<Obstacle> GetAllObstaclesOfType(ObstacleType obstacleType) {
