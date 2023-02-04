@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,6 +10,7 @@ namespace Flora.Scripts {
 
     public class WorldManager : MonoBehaviour {
         public int width, height;
+        public float flowerSpawnChance;
 
         public GameObject floor;
         public GameObject left;
@@ -19,6 +21,10 @@ namespace Flora.Scripts {
         public GameObject cornerTopRight;
         public GameObject cornerBottomLeft;
         public GameObject cornerBottomRight;
+
+        public float flowerHeightOffset;
+
+        public GameObject flower;
         private List<GameObject> allocatedPieces;
 
         public void Clear() {
@@ -44,11 +50,22 @@ namespace Flora.Scripts {
                 for (var z = -height; z <= height; z++) {
                     var original = BuildPiece(x, z);
                     var obj = Instantiate(original, new Vector3(x, 0, z), Quaternion.identity, transform);
-                    obj.name = $"{original} ({x}, {z})";
+                    obj.name = $"{x}, {z}: {original.name}";
                     obj.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
                     allocatedPieces.Add(obj);
+
+                    if (IsCorner(x, z) && Random.value > flowerSpawnChance) {
+                        float rotation = Random.value * 360;
+                        var decoration = Instantiate(flower, new Vector3(x, flowerHeightOffset, z), Quaternion.Euler(0, rotation, 0), transform);
+                        decoration.name = $"{x}, {z}: {flower.name}";
+                        decoration.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+                        allocatedPieces.Add(decoration);
+                    }
                 }
             }
+        }
+        private bool IsCorner(int x, int z) {
+            return x == -width || x == width || z == -height | z == height;
         }
 
         private GameObject BuildPiece(int x, int z) {

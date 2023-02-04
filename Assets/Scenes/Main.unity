@@ -200,14 +200,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 6, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,21 +444,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de6a94088254a6190c8b15c645d9b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
+  width: 6
+  height: 3
+  flowerSpawnChance: 0.5
   floor: {fileID: 8078504951356567929, guid: 3d702e4a30f84184a9a21579ebbb7e2c, type: 3}
-  left: {fileID: 2113304813014618933, guid: f300672cabeffa74280a67786e4e0621, type: 3}
-  right: {fileID: 2502710352715650761, guid: 56de4ef3b998c2c48b3671e16e2f3173, type: 3}
-  top: {fileID: 1215056561306499729, guid: 5f5d18eeef26a964b960328d14526d3a, type: 3}
-  bottom: {fileID: 2089864256993885928, guid: 8b4895dc3da0ee54f9180fa7b4fa4023, type: 3}
-  cornerTopLeft: {fileID: 1292158613949792989, guid: bb4ad2d2dcfee2b449e79a672fb89c30,
+  left: {fileID: 1215056561306499729, guid: 5f5d18eeef26a964b960328d14526d3a, type: 3}
+  right: {fileID: 2089864256993885928, guid: 8b4895dc3da0ee54f9180fa7b4fa4023, type: 3}
+  top: {fileID: 2113304813014618933, guid: f300672cabeffa74280a67786e4e0621, type: 3}
+  bottom: {fileID: 2502710352715650761, guid: 56de4ef3b998c2c48b3671e16e2f3173, type: 3}
+  cornerTopLeft: {fileID: 1388392205117033453, guid: 270c800aef9c67940a96576b335a3442,
     type: 3}
-  cornerTopRight: {fileID: 1388392205117033453, guid: 270c800aef9c67940a96576b335a3442,
+  cornerTopRight: {fileID: 260499261721054556, guid: 500166024eab1184bbbcbd28b03171d5,
     type: 3}
-  cornerBottomLeft: {fileID: 9079106369044402254, guid: cdbe2b3faaad2674fa93ca0e1a4bc1a6,
+  cornerBottomLeft: {fileID: 1292158613949792989, guid: bb4ad2d2dcfee2b449e79a672fb89c30,
     type: 3}
-  cornerBottomRight: {fileID: 260499261721054556, guid: 500166024eab1184bbbcbd28b03171d5,
+  cornerBottomRight: {fileID: 9079106369044402254, guid: cdbe2b3faaad2674fa93ca0e1a4bc1a6,
     type: 3}
+  flowerHeightOffset: 0.1
+  flower: {fileID: 4347248059729545191, guid: f4da2db6f03363c41aa27bee81f263eb, type: 3}
 --- !u!1001 &6647973820094644356
 PrefabInstance:
   m_ObjectHideFlags: 0
