@@ -14,7 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTimeToActivate: 15
   maxTimeToActivate: 89.22
+  predefinedActivations:
+  - rid: 8006740541310238720
   randomActivations:
   - min: 3
     max: 7
     type: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8006740541310238720
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        delay: 5
+        location: 1
+        logLength: 2
