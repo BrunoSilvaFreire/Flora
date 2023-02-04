@@ -57,7 +57,7 @@ namespace Flora.Scripts {
         private void ActivateAnEvent() {
             var anEvent = SelectEvent();
             var speedMultiplier = speedOverTime.Evaluate(time);
-            anEvent.Activate(this, speedMultiplier);
+            StartCoroutine(anEvent.Activate(this, speedMultiplier));
         }
 
         private ObstacleEvent SelectEvent() {

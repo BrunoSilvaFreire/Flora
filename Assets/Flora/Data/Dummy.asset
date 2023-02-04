@@ -14,18 +14,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTimeToActivate: 15
   maxTimeToActivate: 89.22
-  predefinedActivations:
-  - rid: 8006740541310238720
-  randomActivations:
-  - min: 3
-    max: 7
-    type: 0
+  activations:
+  - rid: 8006740541736222720
+  - rid: 8006740541736222721
+  - rid: 8006740541736222722
+  - rid: 8006740541736222723
+  - rid: 8006740541736222724
   references:
     version: 2
     RefIds:
-    - rid: 8006740541310238720
+    - rid: 8006740541736222720
+      type: {class: RandomizedActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 1
+        min: 1
+        max: 35
+        type: 0
+    - rid: 8006740541736222721
+      type: {class: SproutActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 2
+        sproutOffsets:
+        - offset: {x: 3, y: 1}
+          delay: 2
+    - rid: 8006740541736222722
+      type: {class: RandomizedActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 0
+        min: 0
+        max: 0
+        type: 0
+    - rid: 8006740541736222723
+      type: {class: SproutActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 0
+        sproutOffsets: []
+    - rid: 8006740541736222724
       type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
       data:
-        delay: 5
-        location: 1
-        logLength: 2
+        block: 0
+        delay: 0
+        location: 0
+        logLength: 0

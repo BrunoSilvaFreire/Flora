@@ -8,9 +8,10 @@ using Random = UnityEngine.Random;
 namespace Flora.Scripts.Obstacles {
     [Serializable]
     public abstract class Activation {
+        public bool block;
         public float delay;
 
-        public abstract void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet);
+        public abstract IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet);
     }
 
     [Serializable]
@@ -18,7 +19,7 @@ namespace Flora.Scripts.Obstacles {
         public int min, max;
         public ObstacleType type;
 
-        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
             var numToActivate = Random.Range(min, max + 1);
             var remaining = numToActivate;
 
@@ -44,6 +45,7 @@ namespace Flora.Scripts.Obstacles {
                 blacklist.Add(obstacle);
                 remaining--;
             }
+            yield break;
         }
     }
 
@@ -57,7 +59,8 @@ namespace Flora.Scripts.Obstacles {
 
         public List<SproutOffset> sproutOffsets;
 
-        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet) {
+        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet) {
+            yield break;
         }
     }
 
@@ -74,7 +77,8 @@ namespace Flora.Scripts.Obstacles {
         public LogLocation location;
         public int logLength;
 
-        public override void Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+            yield break;
         }
     }
 
@@ -87,11 +91,16 @@ namespace Flora.Scripts.Obstacles {
         [SerializeReference]
         public List<Activation> activations;
 
-        public void Activate(GameManager gameManager, float speedMultiplier) {
+        public IEnumerator Activate(GameManager gameManager, float speedMultiplier) {
             var blacklist = new HashSet<Obstacle>();
 
             foreach (var activation in activations) {
-                activation.Activate(gameManager, speedMultiplier, blacklist);
+                var block = activation.Activate(gameManager, speedMultiplier, blacklist);
+                if (activation.block) {
+                    yield return block;
+                } else {
+                    gameManager.StartCoroutine(block);
+                }
             }
         }
     }
