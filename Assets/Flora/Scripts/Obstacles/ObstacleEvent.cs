@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +10,7 @@ namespace Flora.Scripts.Obstacles {
         public bool block;
         public float delay;
 
-        public abstract IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet);
+        public abstract IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist);
     }
 
     [Serializable]
@@ -25,23 +24,21 @@ namespace Flora.Scripts.Obstacles {
 
             var obstacles = gameManager.GetAllObstaclesOfType(type);
 
-            var i = 0;
+            int i;
 
-            while (remaining > 0) {
-
-                if (i > obstacles.Count) {
-                    break;
-                }
-
-                var obstacle = obstacles[i++];
+            while (obstacles.Count > 0 && remaining > 0) {
+                i = Random.Range(0, obstacles.Count);
+               
+                var obstacle = obstacles[i];
                 if (blacklist.Contains(obstacle)) {
                     continue;
                 }
 
-                if (!obstacle.TryAct(speedMultiplier)) {
+                if (!obstacle.TryActivate(speedMultiplier)) {
                     continue;
                 }
 
+                obstacles.RemoveAt(i);
                 blacklist.Add(obstacle);
                 remaining--;
             }
@@ -59,8 +56,50 @@ namespace Flora.Scripts.Obstacles {
 
         public List<SproutOffset> sproutOffsets;
 
-        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> NewHashSet) {
-            yield break;
+        public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+            var worldManager = gameManager.worldManager;
+
+            var origin = new Vector2Int(
+                Random.Range(-worldManager.width, worldManager.width),
+                Random.Range(-worldManager.height, worldManager.height)
+            );
+
+            foreach (var sproutOffset in sproutOffsets) {
+                if (sproutOffset.delay > 0) {
+                    yield return new WaitForSeconds(sproutOffset.delay * speedMultiplier);
+                }
+
+                var sprout = gameManager.worldManager.GetSproutAtLocation(origin + sproutOffset.offset);
+
+                if (blacklist.Contains(sprout)) {
+                    continue;
+                }
+
+                if (sprout == null) {
+                    continue;
+                }
+
+                if (sprout.TryActivate(speedMultiplier)) {
+                    blacklist.Add(sprout);
+                }
+            }
+        }
+
+        private Vector2Int GetSize() {
+            Vector2Int size = Vector2Int.zero;
+            foreach (var sproutOffset in sproutOffsets) {
+                var offsetX = Mathf.Abs(sproutOffset.offset.x);
+                var offsetY = Mathf.Abs(sproutOffset.offset.y);
+
+                if (offsetX > size.x) {
+                    size.x = offsetX;
+                }
+
+                if (offsetY > size.y) {
+                    size.y = offsetY;
+                }
+            }
+            return size;
         }
     }
 

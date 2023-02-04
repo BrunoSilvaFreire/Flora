@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee106118774e4bb5a061e8493e4773ca, type: 3}
-  m_Name: Dummy
+  m_Name: Dummy2
   m_EditorClassIdentifier: 
   minTimeToActivate: 0
   maxTimeToActivate: 10000
   activations:
   - rid: 8006740541736222721
+  - rid: 8006740541736222726
   references:
     version: 2
     RefIds:
@@ -24,12 +25,11 @@ MonoBehaviour:
       data:
         block: 0
         delay: 0
-        sproutOffsets:
-        - offset: {x: 0, y: -1}
-          delay: 0
-        - offset: {x: 1, y: 0}
-          delay: 0
-        - offset: {x: 0, y: 1}
-          delay: 0
-        - offset: {x: -1, y: 0}
-          delay: 0
+        sproutOffsets: []
+    - rid: 8006740541736222726
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 3
+        location: 0
+        logLength: 0

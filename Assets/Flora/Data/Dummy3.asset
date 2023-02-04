@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee106118774e4bb5a061e8493e4773ca, type: 3}
+  m_Name: Dummy3
+  m_EditorClassIdentifier: 
+  minTimeToActivate: 0
+  maxTimeToActivate: 10000
+  activations:
+  - rid: 8006740541736222726
+  - rid: 8006740542142021632
+  - rid: 8006740542142021633
+  - rid: 8006740542142021634
+  references:
+    version: 2
+    RefIds:
+    - rid: 8006740541736222726
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 1
+        delay: 0
+        location: 0
+        logLength: 0
+    - rid: 8006740542142021632
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 1
+        delay: 0
+        location: 1
+        logLength: 0
+    - rid: 8006740542142021633
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 1
+        delay: 0
+        location: 2
+        logLength: 0
+    - rid: 8006740542142021634
+      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 1
+        delay: 0
+        location: 3
+        logLength: 0

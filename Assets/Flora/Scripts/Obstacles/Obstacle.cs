@@ -15,8 +15,8 @@ namespace Flora.Scripts.Obstacles {
             _coroutine = null;
         }
 
-        public bool TryAct(float speedMultiplier) {
-            if (_coroutine == null) {
+        public bool TryActivate(float speedMultiplier) {
+            if (_coroutine != null) {
                 return false;
             }
 
