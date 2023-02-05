@@ -27,20 +27,20 @@ namespace Flora.Scripts.Obstacles {
 
         public Log logPrefab;
 
-        public LogLocation Location {
+        public FloraDirection Location {
             get {
                 switch (FacingDirection.x) {
                     case > 0:
-                        return LogLocation.Right;
+                        return FloraDirection.Right;
                     case < 0:
-                        return LogLocation.Left;
+                        return FloraDirection.Left;
                 }
 
                 switch (FacingDirection.y) {
                     case > 0:
-                        return LogLocation.Top;
+                        return FloraDirection.Top;
                     case < 0:
-                        return LogLocation.Bottom;
+                        return FloraDirection.Bottom;
                 }
 
                 throw new ArgumentOutOfRangeException();
@@ -63,7 +63,6 @@ namespace Flora.Scripts.Obstacles {
             var log = Instantiate(logPrefab);
 
             log.SetLength(CurrentSize);
-
             yield return StartCoroutine(LogMovementWrapper(log, speedMultiplier));
         }
     }
