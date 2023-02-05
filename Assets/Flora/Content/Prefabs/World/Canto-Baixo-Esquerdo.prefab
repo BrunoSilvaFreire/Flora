@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7896316872359657347}
   - component: {fileID: 8263083492092853604}
   - component: {fileID: 3435794415652724318}
+  - component: {fileID: -7092656432178156576}
   m_Layer: 0
   m_Name: Canto-Baixo-Esquerdo
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-7092656432178156576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079106369044402254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -40,8 +40,12 @@ namespace Flora.Scripts.Player {
 
         private void FixedUpdate() {
             var velocity = new Vector3(move.x, 0, move.y);
+            velocity.Normalize();
+            velocity *= moveSpeed;
 
             var shouldJump = jump.Consume() && _grounded;
+            velocity += Physics.gravity * Time.fixedDeltaTime;
+
             if (shouldJump) {
                 velocity.y = jumpHeight;
             }

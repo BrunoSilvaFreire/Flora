@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3225634862886103876}
   - component: {fileID: 6456602790555490913}
   - component: {fileID: 2005262178992255189}
+  - component: {fileID: -8426759110629473114}
   m_Layer: 0
   m_Name: Canto-Baixo-Direito
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-8426759110629473114
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260499261721054556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
