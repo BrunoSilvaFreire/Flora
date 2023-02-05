@@ -35,6 +35,7 @@ namespace Flora.Scripts {
             }
 
             Cache();
+
             activationCooldown = initialTimeGrace;
             time = 0;
         }
@@ -61,6 +62,8 @@ namespace Flora.Scripts {
             foreach (var pulla in FindObjectsOfType<Pulla>()) {
                 pulla.Revive();
             }
+
+            endScreen.Hide();
         }
 
         private void Update() {
@@ -121,7 +124,6 @@ namespace Flora.Scripts {
             step = false;
             endScreen.Show();
             yield return new WaitForSeconds(endDuration);
-            endScreen.Hide();
             Restart();
             step = true;
             ending = false;
