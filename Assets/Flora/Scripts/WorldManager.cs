@@ -26,6 +26,7 @@ namespace Flora.Scripts {
         public GameObject cornerBottomRight;
 
         public Sprout sproutPrefab;
+        public LogSpawner logSpawnerPrefab;
 
         public float flowerHeightOffset;
 
@@ -38,15 +39,15 @@ namespace Flora.Scripts {
 
         private Dictionary<Vector2Int, Sprout> _sproutCache;
 
-        private List<GameObject> allocatedPieces;
+        private List<GameObject> _allocatedPieces;
 
         private void Awake() {
             Generated = false;
         }
 
         public void Clear() {
-            if (allocatedPieces != null) {
-                foreach (var allocatedPiece in allocatedPieces) {
+            if (_allocatedPieces != null) {
+                foreach (var allocatedPiece in _allocatedPieces) {
 #if UNITY_EDITOR
                     if (!EditorApplication.isPlaying) {
                         DestroyImmediate(allocatedPiece);
@@ -74,17 +75,39 @@ namespace Flora.Scripts {
             Generated = true;
             Clear();
 
-            allocatedPieces = new List<GameObject>();
+            _allocatedPieces = new List<GameObject>();
             _sproutCache = new Dictionary<Vector2Int, Sprout>();
 
             for (var x = -width; x <= width; x++) {
                 for (var z = -height; z <= height; z++) {
                     var original = BuildPiece(x, z);
                     var position = new Vector3(x, 0, z);
+
                     var obj = Instantiate(original, position, Quaternion.identity, transform);
                     obj.name = $"{x}, {z}: {original.name}";
                     obj.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
-                    allocatedPieces.Add(obj);
+
+                    _allocatedPieces.Add(obj);
+
+                    if (x == 0 && z == height / 2) {
+                        var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
+                        logSpawner.MaxSize = width;
+
+                        var axis = new Vector2 {
+                            x = 0,
+                            y = -Mathf.Sign(z)
+                        };
+                        logSpawner.Axis = axis;
+                    } else if (z == 0 && x == width / 2) {
+                        var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
+                        logSpawner.MaxSize = height;
+
+                        var axis = new Vector2 {
+                            x = 0,
+                            y = Mathf.Sign(z)
+                        };
+                        logSpawner.Axis = axis;
+                    }
 
                     if (IsCorner(x, z)) {
                         if (Random.value > flowerSpawnChance) {
@@ -92,7 +115,7 @@ namespace Flora.Scripts {
                             var decoration = Instantiate(flower, new Vector3(x, flowerHeightOffset, z), Quaternion.Euler(0, rotation, 0), obj.transform);
                             decoration.name = $"{x}, {z}: {flower.name}";
                             decoration.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
-                            allocatedPieces.Add(decoration);
+                            _allocatedPieces.Add(decoration);
                         }
                     } else {
                         var sprout = Instantiate(sproutPrefab, position, Quaternion.identity, obj.transform);

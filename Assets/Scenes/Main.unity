@@ -356,50 +356,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1 &1629864888
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1629864890}
-  - component: {fileID: 1629864889}
-  m_Layer: 0
-  m_Name: Log
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1629864889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629864888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b419be672147438bcbf2abdbbc234a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1629864890
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629864888}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.2696214, y: -5.361129, z: -0.6288387}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1827294531
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +414,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 10
+      value: 5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -468,8 +424,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 5
-      inSlope: -14.044702
-      outSlope: -14.044702
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.022478163
@@ -478,8 +434,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   events:
-  - {fileID: 11400000, guid: 0183fac9850b185469b2431eb84d5684, type: 2}
-  - {fileID: 11400000, guid: aa11967d54a792848965f91c050e20d1, type: 2}
+  - {fileID: 11400000, guid: 2448b19a28c175f48adadeb862d36589, type: 2}
   step: 1
   worldManager: {fileID: 919132148893095538}
 --- !u!4 &1827294533
@@ -495,7 +450,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450652896545995
 Transform:
@@ -558,6 +513,8 @@ MonoBehaviour:
   cornerBottomRight: {fileID: 9079106369044402254, guid: cdbe2b3faaad2674fa93ca0e1a4bc1a6,
     type: 3}
   sproutPrefab: {fileID: 6647973821114643696, guid: fecba9e922cd759479290139c859c262,
+    type: 3}
+  logSpawnerPrefab: {fileID: 4956033716928455021, guid: 8bca32dabbf04644ca37a91cdb1ea284,
     type: 3}
   flowerHeightOffset: 0.1
   flower: {fileID: 4347248059729545191, guid: f4da2db6f03363c41aa27bee81f263eb, type: 3}

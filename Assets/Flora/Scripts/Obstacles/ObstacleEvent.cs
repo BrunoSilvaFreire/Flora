@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,7 +30,7 @@ namespace Flora.Scripts.Obstacles {
 
             while (obstacles.Count > 0 && remaining > 0) {
                 i = Random.Range(0, obstacles.Count);
-               
+
                 var obstacle = obstacles[i];
                 if (blacklist.Contains(obstacle)) {
                     continue;
@@ -113,11 +115,48 @@ namespace Flora.Scripts.Obstacles {
     [Serializable]
     public class LogActivation : Activation {
 
-        public LogLocation location;
         public int logLength;
+        public bool randomLocation;
+
+        [HideIf(nameof(randomLocation))]
+        public LogLocation location;
 
         public override IEnumerator Activate(GameManager gameManager, float speedMultiplier, HashSet<Obstacle> blacklist) {
+
+            var length = GetLengthForLog(gameManager);
+
+            var spawner = gameManager.GetAllObstaclesOfType(ObstacleType.Log)
+                .Cast<LogSpawner>()
+                .First(obstacle => obstacle.Location == location);
+
+            spawner.CurrentSize = length;
+
+            if (spawner.TryActivate(speedMultiplier)) {
+                blacklist.Add(spawner);
+            }
+
             yield break;
+        }
+        private int GetLengthForLog(GameManager gameManager) {
+            int length;
+            if (logLength == 0) {
+                switch (location) {
+
+                    case LogLocation.Top:
+                    case LogLocation.Bottom:
+                        length = gameManager.worldManager.height;
+                        break;
+                    case LogLocation.Left:
+                    case LogLocation.Right:
+                        length = gameManager.worldManager.width;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            } else {
+                length = logLength;
+            }
+            return length;
         }
     }
 
