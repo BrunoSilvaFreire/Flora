@@ -22,6 +22,8 @@ namespace Flora.Scripts.Player {
         public float maxSpeed;
         public float decelerationThreshold;
         public float decelerationSpeed;
+        public int score;
+        public int id;
         public Animator animator;
         public Text playerNamespace;
         public SpriteRenderer spriteRenderer;
@@ -35,7 +37,7 @@ namespace Flora.Scripts.Player {
         private static readonly int YVelocity = Animator.StringToHash("YVelocity");
         private static readonly int ZVelocity = Animator.StringToHash("ZVelocity");
         private static readonly int Revived = Animator.StringToHash("Revived");
-        private bool _dead;
+        public Color color;
 
         public void Attach(PlayerInput input) {
             _attached = true;
@@ -56,7 +58,7 @@ namespace Flora.Scripts.Player {
                 return;
             }
 
-            if (_dead) {
+            if (Dead) {
                 move = Vector2.zero;
                 jump.Current = false;
             } else {
@@ -65,10 +67,16 @@ namespace Flora.Scripts.Player {
             }
         }
 
+        public bool Dead {
+            get;
+            private set;
+        }
+
         public void Kill() {
             Debug.Log($"{this} has been killed", this);
-            _dead = true;
+            Dead = true;
             animator.SetTrigger(Death);
+            GameManager.Instance.NotifyDeath(this);
         }
 
         private void FixedUpdate() {
@@ -104,13 +112,18 @@ namespace Flora.Scripts.Player {
             _collisionFlags = controller.Move(velocity * Time.fixedDeltaTime);
         }
         public void Revive() {
-            _dead = false;
+            Dead = false;
             animator.SetTrigger(Revived);
         }
         public void Setup(int NewID, Color color) {
+            id = NewID;
+            this.color = color;
             playerNamespace.text = $"P{NewID}";
             playerNamespace.color = color;
             spriteRenderer.color = color;
+        }
+        public void IncrementScore() {
+            score++;
         }
     }
 }
