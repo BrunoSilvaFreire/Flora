@@ -8,19 +8,22 @@ namespace Flora.Scripts.Obstacles {
 
         public abstract IEnumerator Activate(float speedMultiplier);
 
-        private Coroutine _coroutine;
+        public Coroutine ActiveCoroutine {
+            get;
+            private set;
+        }
 
         private IEnumerator ActionWrapper(float speedMultiplier) {
             yield return Activate(speedMultiplier);
-            _coroutine = null;
+            ActiveCoroutine = null;
         }
 
         public bool TryActivate(float speedMultiplier) {
-            if (_coroutine != null) {
+            if (ActiveCoroutine != null) {
                 return false;
             }
 
-            _coroutine = StartCoroutine(ActionWrapper(speedMultiplier));
+            ActiveCoroutine = StartCoroutine(ActionWrapper(speedMultiplier));
             return true;
         }
     }
