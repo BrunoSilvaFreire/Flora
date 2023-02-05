@@ -1173,6 +1173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827294533}
   - component: {fileID: 1827294532}
+  - component: {fileID: 1827294534}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1293,6 +1294,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1827294534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827294531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297bde55fc4146ae989e1bfd2b50467e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldManager: {fileID: 919132148893095538}
+  cooldown: 5
+  pollen: {fileID: 2929251755466575530, guid: 83ad4b2526ea8f94b9db61f1652f6ea6, type: 3}
 --- !u!1001 &1927937910
 PrefabInstance:
   m_ObjectHideFlags: 0

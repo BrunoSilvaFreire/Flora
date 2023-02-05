@@ -6,6 +6,7 @@ namespace Flora.Scripts.Obstacles {
         private void OnTriggerEnter(Collider other) {
             if (other.TryGetComponent(out Pulla pulla)) {
                 pulla.IncrementScore();
+                Destroy(gameObject);
             }
         }
     }
