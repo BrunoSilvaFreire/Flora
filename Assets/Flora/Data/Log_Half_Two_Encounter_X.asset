@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee106118774e4bb5a061e8493e4773ca, type: 3}
   m_Name: Log_Half_Two_Encounter_X
   m_EditorClassIdentifier: 
-  minTimeToActivate: 0
-  maxTimeToActivate: 0
+  minTimeToActivate: 100
+  maxTimeToActivate: 160
   activations:
   - rid: 9219577735018446866
   - rid: 9219577735018446867
@@ -32,7 +32,7 @@ MonoBehaviour:
       type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
       data:
         block: 0
-        delay: 3
+        delay: 2
         logLength: 2
         randomLocation: 0
         location: 3

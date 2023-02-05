@@ -10,29 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee106118774e4bb5a061e8493e4773ca, type: 3}
-  m_Name: Log_Half_Two_Up
+  m_Name: Log_Half
   m_EditorClassIdentifier: 
-  minTimeToActivate: 100
-  maxTimeToActivate: 160
+  minTimeToActivate: 50
+  maxTimeToActivate: 120
   activations:
-  - rid: 9219577735018446866
-  - rid: 9219577735018446867
+  - rid: 9219577735018446868
   references:
     version: 2
     RefIds:
-    - rid: 9219577735018446866
+    - rid: 9219577735018446868
       type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
       data:
         block: 0
         delay: 0
         logLength: 2
-        randomLocation: 0
-        location: 0
-    - rid: 9219577735018446867
-      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
-      data:
-        block: 0
-        delay: 3
-        logLength: 2
-        randomLocation: 0
+        randomLocation: 1
         location: 0
