@@ -12,9 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee106118774e4bb5a061e8493e4773ca, type: 3}
   m_Name: Sprout_Grid
   m_EditorClassIdentifier: 
-  minTimeToActivate: 0
-  maxTimeToActivate: 0
-  activations: []
+  minTimeToActivate: 120
+  maxTimeToActivate: 210
+  activations:
+  - rid: 9219577738309140480
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 9219577738309140480
+      type: {class: SproutActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
+      data:
+        block: 0
+        delay: 0
+        sproutOffsets:
+        - offset: {x: 1, y: 0}
+          delay: 0
+        - offset: {x: -1, y: 0}
+          delay: 0
+        - offset: {x: 0, y: 1}
+          delay: 0
+        - offset: {x: 0, y: -1}
+          delay: 0
+        - offset: {x: 2, y: 1}
+          delay: 0
+        - offset: {x: 2, y: -1}
+          delay: 0
+        - offset: {x: -2, y: 1}
+          delay: 0
+        - offset: {x: -2, y: -1}
+          delay: 0
+        - offset: {x: 1, y: 2}
+          delay: 0
+        - offset: {x: 1, y: -2}
+          delay: 0
+        - offset: {x: -1, y: 2}
+          delay: 0
+        - offset: {x: -1, y: -2}
+          delay: 0
