@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Flora.Scripts.Player {
     public static class PullaHelpers {
@@ -22,6 +23,8 @@ namespace Flora.Scripts.Player {
         public float decelerationThreshold;
         public float decelerationSpeed;
         public Animator animator;
+        public Text playerNamespace;
+        public SpriteRenderer spriteRenderer;
 
         private bool _attached;
         private InputAction _move, _jump;
@@ -31,6 +34,7 @@ namespace Flora.Scripts.Player {
         private static readonly int XVelocity = Animator.StringToHash("XVelocity");
         private static readonly int YVelocity = Animator.StringToHash("YVelocity");
         private static readonly int ZVelocity = Animator.StringToHash("ZVelocity");
+        private static readonly int Revived = Animator.StringToHash("Revived");
         private bool _dead;
 
         public void Attach(PlayerInput input) {
@@ -93,6 +97,15 @@ namespace Flora.Scripts.Player {
             animator.SetFloat(ZVelocity, velocity.z);
 
             _collisionFlags = controller.Move(velocity * Time.fixedDeltaTime);
+        }
+        public void Revive() {
+            _dead = false;
+            animator.SetTrigger(Revived);
+        }
+        public void Setup(int NewID, Color color) {
+            playerNamespace.text = $"P{NewID}";
+            playerNamespace.color = color;
+            spriteRenderer.color = color;
         }
     }
 }

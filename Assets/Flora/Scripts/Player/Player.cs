@@ -8,15 +8,16 @@ namespace Flora.Scripts.Player {
 
         private Pulla _activePulla;
 
-        public void Spawn(Vector3 position) {
+        public void Spawn(int id, Color color, Vector3 position) {
             if (_activePulla != null) {
                 throw new Exception("There is an active pulla for this player");
             }
 
-
             _activePulla = Instantiate(pullaPrefab, position, Quaternion.identity);
             _activePulla.Attach(input);
+            _activePulla.Setup(id, color);
         }
+
         public void Despawn() {
             if (_activePulla == null) {
                 return;

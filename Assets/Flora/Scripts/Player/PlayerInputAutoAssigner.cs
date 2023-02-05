@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Flora.Scripts.Player {
@@ -6,6 +7,14 @@ namespace Flora.Scripts.Player {
         public PlayerInputManager manager;
         public GameManager gameManager;
         public bool autoSpawn;
+        public Color[] colors;
+
+        private void Update() {
+            if (Keyboard.current.rKey.isPressed) {
+                gameManager.Restart();
+            }
+        }
+
         private void OnEnable() {
             manager.onPlayerJoined += OnJoined;
             manager.onPlayerLeft += OnLeft;
@@ -29,7 +38,8 @@ namespace Flora.Scripts.Player {
             }
             Debug.Log($"Player @ {input} joined");
             if (autoSpawn) {
-                pulla.Spawn(transform.position);
+                var index = input.playerIndex;
+                pulla.Spawn(index+1, colors[index], transform.position);
             }
         }
     }

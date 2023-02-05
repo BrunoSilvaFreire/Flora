@@ -15,7 +15,7 @@ namespace Flora.Scripts.Obstacles {
         public void SetLength(int length) {
             var scale = transform.localScale;
             scale.y = length;
-            logVisualTransform.localScale = scale;
+            transform.localScale = scale;
         }
 
         private void OnTriggerEnter(Collider other) {

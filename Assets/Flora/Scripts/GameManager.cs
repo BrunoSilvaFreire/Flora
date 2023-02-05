@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Flora.Scripts.Obstacles;
+using Flora.Scripts.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +13,7 @@ namespace Flora.Scripts {
         public ObstacleEvent[] events;
         public bool step;
         public WorldManager worldManager;
+        public float initialTimeGrace = 10;
         private Dictionary<ObstacleType, List<Obstacle>> _obstaclesByType;
 
         private float time;
@@ -24,6 +24,7 @@ namespace Flora.Scripts {
                 worldManager.Generate();
             }
             Cache();
+            activationCooldown = initialTimeGrace;
         }
 
         private void Cache() {
@@ -40,8 +41,11 @@ namespace Flora.Scripts {
             }
         }
 
-        private void Restart() {
+        public void Restart() {
             time = 0;
+            foreach (var pulla in FindObjectsOfType<Pulla>()) {
+                pulla.Revive();
+            }
         }
 
         private void Update() {
