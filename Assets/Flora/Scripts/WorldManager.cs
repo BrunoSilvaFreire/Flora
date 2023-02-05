@@ -89,43 +89,60 @@ namespace Flora.Scripts {
 
                     _allocatedPieces.Add(obj);
 
-                    if (x == 0 && z == height / 2) {
-                        var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
-                        logSpawner.MaxSize = width;
-
-                        var axis = new Vector2 {
-                            x = 0,
-                            y = -Mathf.Sign(z)
-                        };
-                        logSpawner.Axis = axis;
-                    } else if (z == 0 && x == width / 2) {
-                        var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
-                        logSpawner.MaxSize = height;
-
-                        var axis = new Vector2 {
-                            x = 0,
-                            y = Mathf.Sign(z)
-                        };
-                        logSpawner.Axis = axis;
-                    }
+                    HandleLogSpawner(x, z, obj);
 
                     if (IsCorner(x, z)) {
                         if (Random.value > flowerSpawnChance) {
-                            var rotation = Random.value * 360;
-                            var decoration = Instantiate(flower, new Vector3(x, flowerHeightOffset, z), Quaternion.Euler(0, rotation, 0), obj.transform);
-                            decoration.name = $"{x}, {z}: {flower.name}";
-                            decoration.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
-                            _allocatedPieces.Add(decoration);
+                            SpawnFlower(x, z, obj);
                         }
                     } else {
-                        var sprout = Instantiate(sproutPrefab, position, Quaternion.identity, obj.transform);
-                        var posX = Mathf.FloorToInt(x);
-                        var posY = Mathf.FloorToInt(z);
-                        _sproutCache[new Vector2Int(posX, posY)] = sprout;
+                        SpawnSprout(position, obj, x, z);
                     }
                 }
             }
         }
+
+        private void SpawnSprout(Vector3 position, GameObject obj, int x, int z) {
+            var sprout = Instantiate(sproutPrefab, position, Quaternion.identity, obj.transform);
+            var posX = Mathf.FloorToInt(x);
+            var posY = Mathf.FloorToInt(z);
+            _sproutCache[new Vector2Int(posX, posY)] = sprout;
+        }
+
+        private void SpawnFlower(int x, int z, GameObject obj) {
+            var rotation = Random.value * 360;
+            var decoration = Instantiate(flower, new Vector3(x, flowerHeightOffset, z), Quaternion.Euler(0, rotation, 0), obj.transform);
+            decoration.name = $"{x}, {z}: {flower.name}";
+            decoration.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+            _allocatedPieces.Add(decoration);
+        }
+
+        private void HandleLogSpawner(int x, int z, GameObject obj) {
+            if (x == 0 && Math.Abs(z) == height) {
+                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
+                logSpawner.MaxSize = width;
+                logSpawner.MaxDistance = height;
+
+                var axis = new Vector2 {
+                    x = 0,
+                    y = -Mathf.Sign(z)
+                };
+                logSpawner.FacingDirection = axis;
+                logSpawner.name = $"LogSpawner - {logSpawner.Location} - {axis}";
+            } else if (z == 0 && Math.Abs(x) == width) {
+                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
+                logSpawner.MaxSize = height;
+                logSpawner.MaxDistance = width;
+
+                var axis = new Vector2 {
+                    x = -Mathf.Sign(x),
+                    y = 0
+                };
+                logSpawner.FacingDirection = axis;
+                logSpawner.name = $"LogSpawner - {logSpawner.Location} - {axis}";
+            }
+        }
+
         private bool IsCorner(int x, int z) {
             return x == -width || x == width || z == -height | z == height;
         }
