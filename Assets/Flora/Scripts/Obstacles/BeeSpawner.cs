@@ -41,7 +41,7 @@ namespace Flora.Scripts.Obstacles {
             }
         }
 
-        public override ObstacleType ObstacleType => ObstacleType.Log;
+        public override ObstacleType ObstacleType => ObstacleType.Bee;
 
         private IEnumerator LogMovementWrapper(Bee bee, float speedMultiplier) {
             yield return bee.Move(

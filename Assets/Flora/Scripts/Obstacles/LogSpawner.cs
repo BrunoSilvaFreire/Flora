@@ -2,8 +2,6 @@
 using System.Collections;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
-
-
     public class LogSpawner : Obstacle {
         public int MaxSize {
             get;
