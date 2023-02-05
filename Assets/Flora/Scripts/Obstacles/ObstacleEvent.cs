@@ -125,9 +125,15 @@ namespace Flora.Scripts.Obstacles {
 
             var length = GetLengthForLog(gameManager);
 
+            LogLocation tgtLocation;
+            if (randomLocation) {
+                tgtLocation = (LogLocation) Random.Range(0, 4);
+            } else {
+                tgtLocation = location;
+            }
             var spawner = gameManager.GetAllObstaclesOfType(ObstacleType.Log)
                 .Cast<LogSpawner>()
-                .First(obstacle => obstacle.Location == location);
+                .First(obstacle => obstacle.Location == tgtLocation);
 
             spawner.CurrentSize = length;
 

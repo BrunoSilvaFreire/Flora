@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
 
@@ -9,12 +10,17 @@ namespace Flora.Scripts.Obstacles {
             set;
         }
 
+        public float MaxDistance {
+            get;
+            set;
+        }
+
         public int CurrentSize {
             get;
             set;
         }
 
-        public Vector2 Axis {
+        public Vector2 FacingDirection {
             get;
             set;
         }
@@ -22,15 +28,43 @@ namespace Flora.Scripts.Obstacles {
         public Log logPrefab;
 
         public LogLocation Location {
-            get;
-            private set;
+            get {
+                switch (FacingDirection.x) {
+                    case > 0:
+                        return LogLocation.Right;
+                    case < 0:
+                        return LogLocation.Left;
+                }
+
+                switch (FacingDirection.y) {
+                    case > 0:
+                        return LogLocation.Top;
+                    case < 0:
+                        return LogLocation.Bottom;
+                }
+
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         public override ObstacleType ObstacleType => ObstacleType.Log;
 
+        private IEnumerator LogMovementWrapper(Log log, float speedMultiplier) {
+            yield return log.Move(
+                transform.position,
+                new Vector3(FacingDirection.x, 0, FacingDirection.y),
+                MaxDistance + 1,
+                speedMultiplier
+            );
+            Destroy(log.gameObject);
+        }
+
         public override IEnumerator Activate(float speedMultiplier) {
             var log = Instantiate(logPrefab);
-            yield return log.Move(Axis, speedMultiplier);
+
+            log.SetLength(CurrentSize);
+
+            yield return StartCoroutine(LogMovementWrapper(log, speedMultiplier));
         }
     }
 }

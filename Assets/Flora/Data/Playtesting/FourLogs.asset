@@ -16,37 +16,23 @@ MonoBehaviour:
   maxTimeToActivate: 10000
   activations:
   - rid: 8006740541736222726
-  - rid: 8006740542142021632
-  - rid: 8006740542142021633
-  - rid: 8006740542142021634
+  - rid: 8006740542142021636
   references:
     version: 2
     RefIds:
     - rid: 8006740541736222726
       type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
       data:
-        block: 1
+        block: 0
         delay: 0
-        location: 0
-        logLength: 3
-    - rid: 8006740542142021632
-      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
-      data:
-        block: 1
-        delay: 0
+        logLength: 0
+        randomLocation: 1
         location: 1
-        logLength: 3
-    - rid: 8006740542142021633
+    - rid: 8006740542142021636
       type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
       data:
-        block: 1
+        block: 0
         delay: 0
+        logLength: 0
+        randomLocation: 1
         location: 2
-        logLength: 3
-    - rid: 8006740542142021634
-      type: {class: LogActivation, ns: Flora.Scripts.Obstacles, asm: Assembly-CSharp}
-      data:
-        block: 1
-        delay: 0
-        location: 3
-        logLength: 3
