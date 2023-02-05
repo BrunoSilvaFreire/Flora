@@ -15,10 +15,16 @@ namespace Flora.Scripts.Player {
         public float maxSpeed;
         public float decelerationThreshold;
         public float decelerationSpeed;
+        public Animator animator;
 
         private bool _attached;
         private InputAction _move, _jump;
         private CollisionFlags _collisionFlags;
+        private static readonly int Death = Animator.StringToHash("Death");
+        private static readonly int Grounded = Animator.StringToHash("Grounded");
+        private static readonly int XVelocity = Animator.StringToHash("XVelocity");
+        private static readonly int YVelocity = Animator.StringToHash("YVelocity");
+        private static readonly int ZVelocity = Animator.StringToHash("ZVelocity");
 
         public void Attach(PlayerInput input) {
             _attached = true;
@@ -41,6 +47,10 @@ namespace Flora.Scripts.Player {
 
             move = _move.ReadValue<Vector2>();
             jump.Current = _jump.IsPressed();
+        }
+
+        public void Kill() {
+            animator.SetTrigger(Death);
         }
 
         private void FixedUpdate() {
@@ -67,7 +77,12 @@ namespace Flora.Scripts.Player {
             horizontal = Vector2.ClampMagnitude(horizontal, maxSpeed);
             velocity.x = horizontal.x;
             velocity.z = horizontal.y;
-            
+
+            animator.SetBool(Grounded, grounded);
+            animator.SetFloat(XVelocity, velocity.x);
+            animator.SetFloat(YVelocity, velocity.y);
+            animator.SetFloat(ZVelocity, velocity.z);
+
             _collisionFlags = controller.Move(velocity * Time.fixedDeltaTime);
         }
     }

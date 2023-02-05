@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 9079151314834611523}
-  pullaPrefab: {fileID: -5972291426059486418, guid: 5dc01ae3a83a29f45809279806d9d4dc,
+  pullaPrefab: {fileID: 3251080610795289390, guid: 5dc01ae3a83a29f45809279806d9d4dc,
     type: 3}
 --- !u!114 &9079151314834611523
 MonoBehaviour:
