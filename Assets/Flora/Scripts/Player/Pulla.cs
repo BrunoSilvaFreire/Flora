@@ -52,12 +52,17 @@ namespace Flora.Scripts.Player {
         }
 
         private void Update() {
-            if (!_attached || _dead) {
+            if (!_attached) {
                 return;
             }
 
-            move = _move.ReadValue<Vector2>();
-            jump.Current = _jump.IsPressed();
+            if (_dead) {
+                move = Vector2.zero;
+                jump.Current = false;
+            } else {
+                move = _move.ReadValue<Vector2>();
+                jump.Current = _jump.IsPressed();
+            }
         }
 
         public void Kill() {

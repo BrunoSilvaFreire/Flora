@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearAnimationDuration: 1
-  speedMultiplier: 2
+  speedMultiplier: 4
   waitDuration: 2
   dropHeightCurve:
     serializedVersion: 2

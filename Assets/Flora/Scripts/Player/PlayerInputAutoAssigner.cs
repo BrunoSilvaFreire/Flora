@@ -10,7 +10,7 @@ namespace Flora.Scripts.Player {
         public Color[] colors;
 
         private void Update() {
-            if (Keyboard.current.rKey.isPressed) {
+            if (Keyboard.current?.rKey?.isPressed ?? false) {
                 gameManager.Restart();
             }
         }
