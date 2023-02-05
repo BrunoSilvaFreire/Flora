@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Flora.Scripts.Player;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
     public class Bee : MonoBehaviour {
@@ -17,6 +18,10 @@ namespace Flora.Scripts.Obstacles {
         private static readonly int Waiting = Animator.StringToHash("Waiting");
         private static readonly int Sweeping = Animator.StringToHash("Sweeping");
         private static readonly int Done = Animator.StringToHash("Done");
+
+        private void OnTriggerEnter(Collider other) {
+            other.TryKillPulla();
+        }
 
         public IEnumerator Move(Vector3 origin, Vector3 direction, float maxDistance, float speedMultiplier) {
             name = $"Log - {origin} -> {direction}, maxDistance: {maxDistance}, speedMultiplier: {speedMultiplier}";

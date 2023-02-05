@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Flora.Scripts.Player;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
     public class Sprout : Obstacle {
@@ -14,8 +15,9 @@ namespace Flora.Scripts.Obstacles {
         public override ObstacleType ObstacleType => ObstacleType.Sprout;
 
         private void OnTriggerEnter(Collider other) {
-            // TODO: Punish 
+            other.TryKillPulla();
         }
+
 
         public override IEnumerator Activate(float speedMultiplier) {
             animator.SetTrigger(BeginKey);

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Flora.Scripts.Player;
 using UnityEngine;
 
 namespace Flora.Scripts.Obstacles {
@@ -14,6 +16,10 @@ namespace Flora.Scripts.Obstacles {
             var scale = transform.localScale;
             scale.y = length;
             logVisualTransform.localScale = scale;
+        }
+
+        private void OnTriggerEnter(Collider other) {
+            other.TryKillPulla();
         }
 
         public IEnumerator Move(Vector3 origin, Vector3 direction, float maxDistance, float speedMultiplier) {

@@ -3,7 +3,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Flora.Scripts.Player {
-
+    public static class PullaHelpers {
+        public static void TryKillPulla(this Collider collider) {
+            if (collider.TryGetComponent(out Pulla pulla)) {
+                pulla.Kill();
+            }
+        }
+    }
     public class Pulla : MonoBehaviour {
         public Vector2 move;
         public EntityAction jump;
@@ -25,6 +31,7 @@ namespace Flora.Scripts.Player {
         private static readonly int XVelocity = Animator.StringToHash("XVelocity");
         private static readonly int YVelocity = Animator.StringToHash("YVelocity");
         private static readonly int ZVelocity = Animator.StringToHash("ZVelocity");
+        private bool _dead;
 
         public void Attach(PlayerInput input) {
             _attached = true;
@@ -41,7 +48,7 @@ namespace Flora.Scripts.Player {
         }
 
         private void Update() {
-            if (!_attached) {
+            if (!_attached || _dead) {
                 return;
             }
 
@@ -50,6 +57,8 @@ namespace Flora.Scripts.Player {
         }
 
         public void Kill() {
+            Debug.Log($"{this} has been killed", this);
+            _dead = true;
             animator.SetTrigger(Death);
         }
 

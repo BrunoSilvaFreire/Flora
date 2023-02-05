@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3589650906772856130}
   - component: {fileID: 387302949998130483}
+  - component: {fileID: 125533282076511040}
   m_Layer: 0
   m_Name: Log
   m_TagString: Untagged
@@ -72,6 +73,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   logVisualTransform: {fileID: 2943290389753375528}
   speedMultiplier: 2
+--- !u!65 &125533282076511040
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589650906772856128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8629447464895784718
 GameObject:
   m_ObjectHideFlags: 0
