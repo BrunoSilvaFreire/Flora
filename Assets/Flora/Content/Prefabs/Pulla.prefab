@@ -48,8 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   controller: {fileID: -3459474910757951096}
-  jumpHeight: 5
-  moveSpeed: 5
+  jumpHeight: 15
+  moveSpeed: 2
+  gravityScale: 0.3
+  gravityScaleWhenHoldingJump: 0.15
+  maxSpeed: 6
+  decelerationThreshold: 0.05
+  decelerationSpeed: 0.3
 --- !u!143 &-3459474910757951096
 CharacterController:
   m_ObjectHideFlags: 0
