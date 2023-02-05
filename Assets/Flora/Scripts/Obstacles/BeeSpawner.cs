@@ -47,7 +47,7 @@ namespace Flora.Scripts.Obstacles {
             yield return bee.Move(
                 transform.position,
                 new Vector3(FacingDirection.x, 0, FacingDirection.y),
-                MaxDistance + 1,
+                MaxDistance + 2,
                 speedMultiplier
             );
             Destroy(bee.gameObject);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 namespace Flora.Scripts.Obstacles {
     public class Bee : MonoBehaviour {
@@ -9,17 +10,31 @@ namespace Flora.Scripts.Obstacles {
         public float speedMultiplier;
         public float waitDuration;
         public AnimationCurve dropHeightCurve;
+        public SpriteRenderer renderer;
+        public Animator animator;
+
+        private static readonly int Appearing = Animator.StringToHash("Appearing");
+        private static readonly int Waiting = Animator.StringToHash("Waiting");
+        private static readonly int Sweeping = Animator.StringToHash("Sweeping");
+        private static readonly int Done = Animator.StringToHash("Done");
 
         public IEnumerator Move(Vector3 origin, Vector3 direction, float maxDistance, float speedMultiplier) {
             name = $"Log - {origin} -> {direction}, maxDistance: {maxDistance}, speedMultiplier: {speedMultiplier}";
-            var pos = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, pos, 0);
+            renderer.flipX = direction.x > 0;
 
             _killing = false;
+
+            animator.SetTrigger(Appearing);
             yield return Appear(origin, direction, speedMultiplier);
+
+            animator.SetTrigger(Waiting);
             yield return Wait(speedMultiplier);
+
             _killing = true;
+            animator.SetTrigger(Sweeping);
+
             yield return Sweep(direction, maxDistance, speedMultiplier);
+            animator.SetTrigger(Done);
             _killing = false;
         }
 
@@ -38,10 +53,10 @@ namespace Flora.Scripts.Obstacles {
             }
         }
 
-        private IEnumerator Appear(Vector3 origin, Vector3 direction, float speedMultiplier) {
+        private IEnumerator Appear(Vector3 destination, Vector3 direction, float speedMultiplier) {
             float elapsed = 0;
 
-            var destination = origin + direction;
+            var origin = destination - direction;
             while (elapsed < appearAnimationDuration) {
                 var t = elapsed / appearAnimationDuration;
 

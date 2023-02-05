@@ -71,6 +71,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   logVisualTransform: {fileID: 2943290389753375528}
+  speedMultiplier: 2
 --- !u!1 &8629447464895784718
 GameObject:
   m_ObjectHideFlags: 0

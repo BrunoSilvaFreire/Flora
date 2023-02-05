@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8201513912407673857}
   - component: {fileID: 8201513912407673856}
   - component: {fileID: 8201513912407673863}
+  - component: {fileID: 5721684876712700038}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -106,17 +107,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 5.0109024
-      inSlope: 0
-      outSlope: 0
+      inSlope: -11.483069
+      outSlope: -11.483069
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.026315788
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -16.002415
-      outSlope: -16.002415
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.02357465
@@ -124,3 +125,25 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  renderer: {fileID: 8201513912407673856}
+  animator: {fileID: 5721684876712700038}
+--- !u!95 &5721684876712700038
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8201513912407673862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 17fc1997f78722c4eb7a55d6405f311d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
