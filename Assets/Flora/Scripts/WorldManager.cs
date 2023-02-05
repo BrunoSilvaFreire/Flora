@@ -27,6 +27,7 @@ namespace Flora.Scripts {
 
         public Sprout sproutPrefab;
         public LogSpawner logSpawnerPrefab;
+        public BeeSpawner beeSpawnerPrefab;
 
         public float flowerHeightOffset;
 
@@ -119,27 +120,40 @@ namespace Flora.Scripts {
 
         private void HandleLogSpawner(int x, int z, GameObject obj) {
             if (x == 0 && Math.Abs(z) == height) {
-                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
-                logSpawner.MaxSize = width;
-                logSpawner.MaxDistance = height;
-
                 var axis = new Vector2 {
                     x = 0,
                     y = -Mathf.Sign(z)
                 };
+                
+                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
+                logSpawner.MaxSize = width;
+                logSpawner.MaxDistance = height;
                 logSpawner.FacingDirection = axis;
                 logSpawner.name = $"LogSpawner - {logSpawner.Location} - {axis}";
-            } else if (z == 0 && Math.Abs(x) == width) {
-                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
-                logSpawner.MaxSize = height;
-                logSpawner.MaxDistance = width;
 
+                var beeSpawner = Instantiate(beeSpawnerPrefab, new Vector3(0, 0, z), Quaternion.identity, obj.transform);
+                beeSpawner.MaxDistance = height;
+                beeSpawner.FacingDirection = axis;
+                beeSpawner.name = $"BeeSpawner - {logSpawner.Location} - {axis}";
+
+            } else if (z == 0 && Math.Abs(x) == width) {
                 var axis = new Vector2 {
                     x = -Mathf.Sign(x),
                     y = 0
                 };
+                
+                var logSpawner = Instantiate(logSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
+                logSpawner.MaxSize = height;
+                logSpawner.MaxDistance = width;
                 logSpawner.FacingDirection = axis;
                 logSpawner.name = $"LogSpawner - {logSpawner.Location} - {axis}";
+                
+                
+                
+                var beeSpawner = Instantiate(beeSpawnerPrefab, new Vector3(x, 0, 0), Quaternion.identity, obj.transform);
+                beeSpawner.MaxDistance = width;
+                beeSpawner.FacingDirection = axis;
+                beeSpawner.name = $"BeeSpawner - {logSpawner.Location} - {axis}";
             }
         }
 
